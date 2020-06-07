@@ -1,29 +1,18 @@
 object Permutations {
 
   def main(args: Array[String]): Unit = {
-    permutations("abc").foreach(println)
+    permutations("carlo", "")
   }
 
-  def permutations( s: String ): Set[String] ={
+  def permutations( s:String, prefix:String): Unit ={
 
-    if( s == "" ){
-      return Set[String]("")
+    if(s == "") {
+        println(prefix)
     }
 
-    val array = s.toCharArray
-    var permSet = Set[String]()
-
-    for( c <- 0 until array.length ){
-
-      val nextPerms = permutations( array.subSequence(0,c).toString + array.subSequence(c+1,array.length).toString )
-
-      nextPerms.foreach( p =>
-        permSet = permSet + ( array(c)+p )
-      )
-
+    for( i <- 0 until s.length ){
+      permutations( s.substring(0,i)+s.substring(i+1), prefix+s.charAt(i))
     }
-
-    permSet
 
   }
 }
